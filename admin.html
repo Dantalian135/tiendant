@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #productTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    #productTable th,
+    #productTable td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    #productTable th {
+      background-color: #f2f2f2;
+    }
+    .product-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+    .action-btn {
+      margin: 0 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+    .save-btn {
+      background-color: #2196F3;
+      color: white;
+    }
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+    }
+    .restore-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .view-btn {
+      background-color: #888;
+      color: white;
+    }
+    section#admin-panel {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    section#admin-panel h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #navbar li a.active {
+      color: #009688;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="header">
+    <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="Tienda.html">Tienda</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="Nosotros.html">Nosotros</a></li>
+   
+        <li><a href="Contactanos.html">Contacto</a></li>
+        <li><a href="iniciarsesion.html">IniciarSesion</a></li>
+        <li><a class="active" href="admin.html">Admin</a></li>
+        <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+        <a href="#" id="close"><i class="far fa-times"></i></a>
+      </ul>
+    </div>
+    <div id="mobile">
+      <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+      <i id="bar" class="fas fa-outdent"></i>
+    </div>
+  </section>
+
+  <section id="admin-panel" class="section-p1">
+    <h2>Administrar Productos</h2>
+    <button class="action-btn view-btn" onclick="verActivos()">Ver Activos</button>
+    <button class="action-btn view-btn" onclick="verPapelera()">Ver Papelera</button>
+
+    <<table id="productTable">
+  <thead>
+    <tr>
+      <th>Imagen</th>
+      <th>Nombre</th>
+      <th>Precio ($)</th>
+      <th>Categoría</th>
+      <th>Descripción</th>
+      <th>Acciones</th>
+    </tr>
+    <!-- FILA PARA AGREGAR NUEVO PRODUCTO -->
+    <tr>
+      <td><input type="text" id="newImage" placeholder="Ruta de Imagen" style="width: 100%"></td>
+      <td><input type="text" id="newName" placeholder="Nombre" style="width: 100%"></td>
+      <td><input type="number" id="newPrice" placeholder="Precio" step="0.01" style="width: 100%"></td>
+      <td>
+        <select id="newCategoria" style="width: 100%">
+          <option value="">-- Categoría --</option>
+          <option value="Macetas">Macetas</option>
+          <option value="Ceramicos">Ceramicos</option>
+          <option value="Muebles">Muebles</option>
+          <option value="Juguetes">Juguetes</option>
+          <option value="Telares">Telares</option>
+          <option value="Utensilios">Utensilios</option>
+          <option value="Roperos">Roperos</option>
+        </select>
+      </td>
+      <td><input type="text" id="newDescripcion" placeholder="Descripción" style="width: 100%"></td>
+      <td>
+        <button class="action-btn save-btn" onclick="agregarNuevoProducto()">Agregar</button>
+      </td>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+
+  <script>
+     let admin = [];
+
+    window.onload = function() {
+      if (localStorage.getItem("admin")) {
+        admin = JSON.parse(localStorage.getItem("admin"));
+        verActivos();
+      } else {
+        admin =  [
+            
+          {
+            nombre: 'Maceta Madera Natural',
+            precio: 45.00,
+            imagen: 'imagenes/mm.jpg',
+            categoria: 'Macetas',
+            descripcion: 'Maceta elaborada en madera natural con tratamiento impermeabilizante.',
+            activo: true
+          },
+          {
+            nombre: 'Maceta Tallada a Mano',
+            precio: 65.00,
+            imagen: 'imagenes/md.jpg',
+            categoria: 'Macetas',
+            descripcion: 'Esta maceta artesanal presenta tallados únicos en su superficie.',
+            activo: true
+          },
+          {
+            nombre: 'Maceta Rústica Blanca',
+            precio: 55.00,
+            imagen: 'imagenes/mb.jpg',
+            categoria: 'Macetas',
+            descripcion: 'Maceta de cerámica con acabado blanco envejecido, ideal para interiores vintage.',
+            activo: true
+          },
+          {
+            nombre: 'Maceta de Tronco Natural',
+            precio: 70.00,
+            imagen: 'imagenes/mt.avif',
+            categoria: 'Macetas',
+            descripcion: 'Maceta fabricada con tronco ahuecado, conservando su textura natural.',
+            activo: true
+          },
+          {
+            nombre: 'Maceta Estilo Industrial',
+            precio: 60.00,
+            imagen: 'imagenes/mc.jpg',
+            categoria: 'Macetas',
+            descripcion: 'De concreto rústico que da una estética industrial moderna.',
+            activo: true
+          },
+            {
+          nombre: "Piedra Granito",
+          precio: 139.00,
+          imagen: "images/imagenes/Ceramicos/ceramico pidra granito.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra de granito es una opción ideal para quienes buscan durabilidad, elegancia y un acabado atemporal. Extraída de canteras naturales, esta roca ígnea se caracteriza por su alta resistencia al desgaste, al calor y a la humedad, lo que la convierte en la elección perfecta para encimeras, pisos, fachadas, escaleras y más.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Lisa",
+          precio: 362.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra lisa.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra lisa destaca por su superficie perfectamente pulida y uniforme que refleja elegancia y sofisticación. Su acabado suave al tacto y su brillo natural la convierten en una opción premium para espacios selectos. Ideal para aplicaciones donde se requiere un acabado refinado y de fácil limpieza. Su versatilidad cromática permite adaptarse a diferentes estilos decorativos desde clásicos hasta contemporáneos. Excelente para encimeras, revestimientos interiores, suelos de lujo y elementos decorativos de alta gama.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Blanca",
+          precio: 249.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra blanca.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra blanca es un material natural de gran elegancia y pureza visual que opción perfecta para proyectos modernos y minimalistas. Resistente a la intemperie y de fácil mantenimiento, es ideal tanto para interiores como exteriores. Su versatilidad permite combinarla con otros materiales creando contrastes armoniosos. Perfecta para revestimientos, suelos, jardines y elementos decorativos que requieren un toque sofisticado.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Geo",
+          precio: 569.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra geo.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra geo se caracteriza por sus formas geométricas perfectamente definidas y sus líneas rectas que aportan orden visual. Su superficie presenta patrones naturales únicos que crean efectos visuales modernos y contemporáneos. Ideal para proyectos arquitectónicos que buscan un diseño estructurado y profesional. Su durabilidad excepcional la hace perfecta para áreas de alto tránsito y uso intensivo. Combina funcionalidad y estética en aplicaciones como pavimentos, muros y elementos decorativos geométricos.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Jarka",
+          precio: 520.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra jarka.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra jarka es reconocida por su textura rugosa y su coloración natural que va desde tonos ocres hasta rojizos. Su origen volcánico le confiere propiedades únicas de resistencia y durabilidad excepcionales. Perfecta para crear ambientes rústicos y naturales que conectan con la tradición constructiva andina. Su superficie irregular proporciona un agarre natural, ideal para escalones y senderos. Excelente opción para revestimientos exteriores, muros de contención y proyectos paisajísticos que buscan autenticidad.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Laja",
+          precio: 623.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra laja.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra laja se distingue por su superficie plana y textura ligeramente rugosa, con una paleta de colores que abarca desde grises plateados hasta tonos dorados, terracotas y verdes oscuros. De origen sedimentario, su formación en capas delgadas le brinda una resistencia notable y una durabilidad que perdura por décadas, incluso en condiciones climáticas extremas.",
+          activo: true
+        },
+        {
+          nombre: "Ceramico Piedra",
+          precio: 521.00,
+          imagen: "images/imagenes/Ceramicos/ceramico tipo piedra.avif",
+          categoria: "Ceramicos",
+          descripcion: "Apariencia: Textura superficial que replica fielmente la irregularidad y tonalidades de la piedra natural (grises, beiges, ocres o negros). ✔ Resistencia: Alta durabilidad frente al tráfico intenso, rayones y abrasión. ✔ Versatilidad: Compatible con interiores y exteriores (resistente a heladas y UV). ✔ Práctico: Superficie antideslizante (ideal para terrazas, patios y áreas húmedas) y fácil de limpiar. ✔ Ecológico: Fabricado con materiales sostenibles y procesos de baja emisión.",
+          activo: true
+        },
+  {
+    nombre: "Silla contemporánea",
+    precio: 65.00,
+    imagen: "imagenes/imagenes/sillones/silla-contemporanea.avif",
+    categoria: "Muebles",
+    descripcion: "Material: Madera sólida. Pintura: No tóxica. Diseño: Auténtico. Tamaño: 52 cm de largo × 26 cm de alto. Acabado: Lijado suave para evitar astillas. Colores: Naturales o vibrantes.",
+    activo: true
+  },
+  {
+    nombre: "Sillón curvo",
+    precio: 95.00,
+    imagen: "imagenes/imagenes/sillones/silla-curva.avif",
+    categoria: "Muebles",
+    descripcion: "Material: Madera natural pulida, suave al tacto. Pintura: Base al agua no tóxica. Sonido: madera pulida. Acabado: Superficie ultra-lisa sin astillas. Diseño: Formas redondeadas y coloridas para estimulación visual.",
+    activo: true
+  },
+  {
+    nombre: "Silla mecedora",
+    precio: 56.50,
+    imagen: "imagenes/imagenes/sillones/silla-mesedora.avif",
+    categoria: "Muebles",
+    descripcion: "Material: Madera de pino macizo, tallado artesanal libre de astillas. Color: café. Pintura: pulida a la perfección. Acabado: Barniz ecológico de protección.",
+    activo: true
+  },
+  {
+    nombre: "Silla relajadora",
+    precio: 85.00,
+    imagen: "imagenes/imagenes/sillones/sillon blanco.avif",
+    categoria: "Muebles",
+    descripcion: "Contenido: silla relajadora. Material: Madera de haya con acabado natural café claro. Colores: Tono café natural con detalles en beige. Seguridad: Pintura al agua no tóxica (certificado EN-71).",
+    activo: true
+  },
+  {
+    nombre: "Sillón de cuero",
+    precio: 89.25,
+    imagen: "imagenes/imagenes/sillones/sillon de cuero.jpg",
+    categoria: "Muebles",
+    descripcion: "Contenido: sillón de cuero vegetal café. Material: Madera de tilo natural con bordes redondeados. Colores: Tintes vegetales en café. Seguridad: Certificado ASTM F963. Extra: Superficie ligeramente texturizada para mejor agarre.",
+    activo: true
+  },
+  {
+    nombre: "Sillón de tela ploma",
+    precio: 653.25,
+    imagen: "imagenes/imagenes/sillones/sillondemadera.jpg",
+    categoria: "Muebles",
+    descripcion: "Material: Estructura de madera sólida con tapizado en tela poliéster gris plomo. Color: Plomo neutro (acabado mate con textura suave). Dimensiones: 85cm alto × 90cm ancho × 95cm profundidad. Comodidad: Cojines rellenos de espuma de alta densidad + fibras siliconadas. Estilo: Minimalista contemporáneo con líneas limpias. Resistencia: Soporta hasta 150kg por asiento. Funcionalidad: Funda removible y lavable a máquina. Montaje: No requiere herramientas; patas enroscables incluidas.",
+    activo: true
+  },{
+          nombre: 'Camión de Madera',
+          precio: 25.00,
+          imagen: 'imagenes/imagenes/juguetes/camion.avif',
+          categoria: 'Juguetes',
+          descripcion: 'Material: Madera sólida tallada a mano, con detalles resistentes. Pintura: No tóxica (opcional). Diseño: Auténtico y encantador, ideal para niños y coleccionistas. Tamaño: 12 cm de largo × 6 cm de alto. Acabado: Lijado suave para evitar astillas. Colores: Naturales o vibrantes (a elección).',
+          activo: true
+        },
+        {
+          nombre: 'Sonajeros para bebe',
+          precio: 65.00,
+          imagen: 'imagenes/imagenes/juguetes/abaco.avif',
+          categoria: 'Juguetes',
+          descripcion: 'Material: Madera natural pulida, suave al tacto y segura para bebés. Pintura: Base al agua no tóxica (certificada EN-71). Sonido: Suave cascabeleo estimulante para los sentidos. Tamaño: 8 cm de diámetro (ideal para manitas pequeñas). Acabado: Superficie ultra-lisa sin astillas. Diseño: Formas redondeadas y coloridas para estimulación visual. Edad recomendada: 6+ meses.',
+          activo: true
+        },
+        {
+          nombre: 'Camioncito verde',
+          precio: 41.90,
+          imagen: 'imagenes/imagenes/juguetes/camioncito.avif',
+          categoria: 'Juguetes',
+          descripcion: 'Material: Madera de pino macizo, tallado artesanal libre de astillas. Color: Verde bosque con detalles en tonos naturales. Pintura: Base al agua no tóxica, certificada para juguetes. Dimensiones: 15 cm largo × 8 cm alto × 7 cm ancho. Ruedas: Madera con movimiento suave (no se desprenden). Acabado: Barniz ecológico de protección. Edad: Recomendado para 3+ años. Incluye: Caja de regalo ecológica con descripción del producto.',
+          activo: true
+        },
+        {
+          nombre: 'Set dinosaurio',
+          precio: 34.65,
+          imagen: 'imagenes/imagenes/juguetes/dinosaurio.avif',
+          categoria: 'Juguetes',
+          descripcion: 'Contenido: 1 dinosaurio de madera + 3 sonajeros integrados. Material: Madera de haya con acabado natural café claro. Sonajeros: Contienen cuentas de madera con sonido suave. Dimensiones: Dinosaurio 18 cm largo × 10 cm alto. Colores: Tono café natural con detalles en beige. Seguridad: Pintura al agua no tóxica (certificado EN-71). Edad: Recomendado 6+ meses. Extra: Superficie texturizada para estimulación táctil.',
+          activo: true
+        },
+        {
+          nombre: 'Set figuritas',
+          precio: 58.25,
+          imagen: 'imagenes/imagenes/juguetes/figuritas.jpg',
+          categoria: 'Juguetes',
+          descripcion: 'Contenido: 3 figuras talladas a mano (elefante 8cm + pájaro 5cm). Material: Madera de tilo natural con bordes redondeados. Colores: Tintes vegetales en azul cielo y café suave. Seguridad: Certificado ASTM F963 para juguetes infantiles. Edad: Ideal 3 a 6 años (sin piezas pequeñas). Estimula: Juego imaginativo y motricidad fina. Incluye: Bolsita de algodón para guardar las figuras. Extra: Superficie ligeramente texturizada para mejor agarre.',
+          activo: true
+        },
+        {
+          nombre: 'Locomotora de trensito rojo',
+          precio: 63.25,
+          imagen: 'imagenes/imagenes/juguetes/trencitomadera.jpg',
+          categoria: 'Juguetes',
+          descripcion: 'Material: Madera de arce con detalles en caucho natural. Color: Rojo brillante con detalles negros y plateados. Dimensiones: 25 cm largo × 8 cm alto × 6 cm ancho. Movilidad: Ruedas giratorias con ejes de acero inoxidable. Edad: Recomendado 5-12 años (resistente para juego activo). Seguridad: Barniz ecológico no tóxico (certificado EN-71-3). Funciones: Gancho remolque para vagones (vendidos por separado). Educativo: Incluye folleto sobre historia del ferrocarril.',
+          activo: true
+        },{
+          nombre: "Tejido de colores lana de alpaca gruesa",
+          precio: 63.00,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos2.avif",
+          categoria: "Telares",
+          descripcion: "Material: Lana de alpaca 100% gruesa y natural. Tinte: Pigmentos minerales en tonos verde musgo y café tierra. Diseño: Textura rústica con patrón lineal artesanal. Tamaño: 140 cm de ancho × 200 cm de largo. Acabado: Terminaciones anudadas a mano. Colores: Verde profundo y café cálido. Funcionalidad: Ideal para climas fríos, aislante térmico natural.",
+          activo: true
+        },
+        {
+          nombre: "Lana gruesa blanca",
+          precio: 56.50,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos3.avif",
+          categoria: "Telares",
+          descripcion: "Material: Lana 100% natural de oveja, hilada a mano. Color: Blanco crudo sin teñir. Textura: Densa y mullida con sensación cálida. Tamaño: 140 cm x 200 cm. Acabado: Bordes reforzados con flecos. Estilo: Minimalista y rústico. Funcionalidad: Alta capacidad térmica, ideal para invierno o decoración.",
+          activo: true
+        },
+        {
+          nombre: "Telar Blanco",
+          precio: 52.00,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos4.jpg",
+          categoria: "Telares",
+          descripcion: "Material: Mezcla de algodón y lana fina. Color: Blanco nieve. Tejido: Ligero y respirable. Dimensiones: 140 cm x 200 cm. Toque: Suave y delicado. Detalles: Flecos cortos en los extremos. Uso: Perfecto para cama individual, sofá o manta ligera. Mantenimiento: Lavar a mano o en ciclo suave.",
+          activo: true
+        },
+        {
+          nombre: "Telar grueso",
+          precio: 36.25,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos5.jpg",
+          categoria: "Telares",
+          descripcion: "Material: Madera de tilo natural. Colores: Tintes vegetales en café. Seguridad: Certificado ASTM F963. Extra: Superficie texturizada para mejor agarre.",
+          activo: true
+        },
+        {
+          nombre: "Telar blanco delgado",
+          precio: 53.55,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos6.avif",
+          categoria: "Telares",
+          descripcion: "Material: Hilo de lana merino ligera. Color: Blanco puro sin teñir. Diseño: Tejido plano con patrón sutil. Tamaño: 130 cm x 190 cm. Textura: Delicada, transpirable y suave. Acabado: Bordes rematados a mano. Estilo: Ligero y versátil. Cuidados: Lavar a mano y secar en plano.",
+          activo: true
+        },{
+          nombre: "Cuchara de Madera Tallada",
+          precio: 12.00,
+          imagen: "imagenes/cm.jpeg",
+          categoria: "Utensilios",
+          descripcion: "Hecha a mano con madera natural, esta cuchara artesanal es perfecta para cocinar o servir. Su acabado suave y tallado la convierte en una pieza funcional y decorativa.",
+          activo: true
+        },
+        {
+          nombre: "Tabla de Corte Artesanal",
+          precio: 28.00,
+          imagen: "imagenes/uy.jpg",
+          categoria: "Utensilios",
+          descripcion: "Tabla robusta elaborada con madera reciclada, tratada para resistir el uso culinario. Ideal para quienes buscan sostenibilidad y estilo en la cocina.",
+          activo: true
+        },
+        {
+          nombre: "Vasija de Barro",
+          precio: 18.00,
+          imagen: "imagenes/vba.jpg",
+          categoria: "Utensilios",
+          descripcion: "Tradicional vasija hecha a mano con barro cocido. Perfecta para almacenar agua o como elemento decorativo con un aire ancestral.",
+          activo: true
+        },
+        {
+          nombre: "Mortero de Piedra",
+          precio: 35.00,
+          imagen: "imagenes/mp.jpg",
+          categoria: "Utensilios",
+          descripcion: "Utensilio imprescindible en la cocina tradicional. Este mortero de piedra está tallado a mano y es ideal para preparar salsas y moler especias de forma natural.",
+          activo: true
+        },
+        {
+          nombre: "Jarro de Cerámica Artesanal",
+          precio: 22.00,
+          imagen: "imagenes/jb.jpeg",
+          categoria: "Utensilios",
+          descripcion: "Jarro pintado a mano con diseños andinos. Ideal para servir bebidas tradicionales o como pieza decorativa llena de identidad cultural.",
+          activo: true
+        },  {
+          nombre: "Ropero Madera Natural",
+          precio: 520.00,
+          imagen: "imagenes/123.jpg",
+          categoria: "Roperos",
+          descripcion: "Ropero elaborado con madera natural de alta calidad, ideal para ambientes rústicos o escandinavos. Su diseño simple realza las vetas de la madera y ofrece una gran capacidad de almacenamiento.",
+          activo: true
+        },
+        {
+          nombre: "Ropero Tallado a Mano",
+          precio: 680.00,
+          imagen: "imagenes/789.jpg",
+          categoria: "Roperos",
+          descripcion: "Con finos detalles tallados a mano, este ropero aporta un toque único y artesanal al dormitorio. Ideal para quienes aprecian el trabajo detallado y la estética tradicional.",
+          activo: true
+        },
+        {
+          nombre: "Ropero Rústico Blanco",
+          precio: 610.00,
+          imagen: "imagenes/159.jpg",
+          categoria: "Roperos",
+          descripcion: "Este ropero con acabado blanco envejecido ofrece un estilo vintage que combina perfectamente con decoraciones campestres o románticas. Amplio y funcional para cualquier habitación.",
+          activo: true
+        },
+        {
+          nombre: "Ropero de Troncos",
+          precio: 720.00,
+          imagen: "imagenes/120.jpg",
+          categoria: "Roperos",
+          descripcion: "Diseñado con troncos naturales y resistentes, este ropero ofrece una estructura robusta y un aspecto rústico único. Ideal para cabañas o casas de campo.",
+          activo: true
+        },
+        {
+          nombre: "Ropero Estilo Industrial",
+          precio: 650.00,
+          imagen: "imagenes/h7.jpg",
+          categoria: "Roperos",
+          descripcion: "Este ropero mezcla madera recuperada con acentos metálicos para un look industrial moderno. Práctico y con mucha presencia visual, encaja en espacios urbanos o con estilo tipo loft.",
+          activo: true
+        }
+          // ¡Agrega aquí los demás productos si quieres!
+        ];
+
+        localStorage.setItem("productos", JSON.stringify(productos));
+        verActivos();
+      }
+    };
+
+    
+    function verActivos() {
+      renderTabla(admin.filter(p => p.activo !== false), false);
+    }
+
+    function verPapelera() {
+      renderTabla(admin.filter(p => p.activo === false), true);
+    }
+
+    function renderTabla(listado, esPapelera) {
+      const tbody = document.querySelector("#productTable tbody");
+      tbody.innerHTML = "";
+      listado.forEach((prod, index) => {
+        let realIndex = admin.findIndex(p => p.nombre === prod.nombre);
+        tbody.innerHTML += `
+          <tr>
+            <td><img src="${prod.imagen}" class="product-img"></td>
+            <td><input type="text" value="${prod.nombre}" id="name-${realIndex}"></td>
+            <td><input type="number" value="${prod.precio}" id="price-${realIndex}" step="0.01"></td>
+            <td>${prod.categoria}</td>
+            <td><input type="text" value="${prod.descripcion || ''}" id="desc-${realIndex}"></td>
+            <td>
+              ${esPapelera ? `
+                <button class="action-btn restore-btn" onclick="restaurarProducto(${realIndex})">Restaurar</button>
+                <button class="action-btn delete-btn" onclick="borrarProducto(${realIndex})">Borrar Definitivo</button>
+              ` : `
+                <button class="action-btn save-btn" onclick="guardarProducto(${realIndex})">Guardar</button>
+                <button class="action-btn delete-btn" onclick="eliminarProducto(${realIndex})">Eliminar</button>
+              `}
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function guardarProducto(i) {
+      admin[i].nombre = document.getElementById(`name-${i}`).value;
+      admin[i].precio = parseFloat(document.getElementById(`price-${i}`).value);
+      admin[i].descripcion = document.getElementById(`desc-${i}`).value;
+      localStorage.setItem("admin", JSON.stringify(admin));
+      alert("Producto actualizado");
+      verActivos();
+    }
+
+    function eliminarProducto(i) {
+      if (confirm("¿Enviar producto a la papelera?")) {
+        admin[i].activo = false;
+        localStorage.setItem("admin", JSON.stringify(admin));
+        verActivos();
+      }
+    }
+
+    function restaurarProducto(i) {
+      admin[i].activo = true;
+      localStorage.setItem("admin", JSON.stringify(admin));
+      alert("Producto restaurado");
+      verActivos();
+    }
+
+    function borrarProducto(i) {
+      if (confirm("¿Borrar definitivamente este producto?")) {
+        admin.splice(i, 1);
+        localStorage.setItem("admin", JSON.stringify(admin));
+        verPapelera();
+      }
+    }
+    function agregarNuevoProducto() {
+  const nombre = document.getElementById("newName").value.trim();
+  const precio = parseFloat(document.getElementById("newPrice").value);
+  const imagen = document.getElementById("newImage").value.trim();
+  const categoria = document.getElementById("newCategoria").value.trim();
+  const descripcion = document.getElementById("newDescripcion").value.trim();
+
+  if (!nombre || isNaN(precio) || !imagen || !categoria) {
+    alert("Por favor completa todos los campos obligatorios.");
+    return;
+  }
+
+  admin.push({
+    nombre,
+    precio,
+    imagen,
+    categoria,
+    descripcion,
+    activo: true
+  });
+
+  localStorage.setItem("admin", JSON.stringify(admin));
+  alert("¡Producto agregado exitosamente!");
+  document.getElementById("newName").value = "";
+  document.getElementById("newPrice").value = "";
+  document.getElementById("newImage").value = "";
+  document.getElementById("newCategoria").value = "";
+  document.getElementById("newDescripcion").value = "";
+  verActivos();
+}
+
+</script>
+</body>
+
+</html>

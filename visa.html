@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalles de Pago</title>
+
+  <!-- k. Personalización Sitio Web: Iconos -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+  <!-- k. Personalización Sitio Web: Archivos externos -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* k. Personalización: Tipografía, colores, vectores */
+    .payment-fullscreen {
+      min-height: 100vh;
+      background: linear-gradient(to right, #dbeafe, #fef9c3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .payment-card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .payment-card h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #111827;
+    }
+
+    .form-row {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-row label {
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .form-row input,
+    .form-row select {
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    .form-row.triple {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row.triple > div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .btn-pay {
+      width: 100%;
+      background-color: #10b981;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .btn-pay:hover {
+      background-color: #059669;
+    }
+
+    /* n. Menú responsivo */
+    #navbar.active {
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<section id="header">
+  <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
+  <div>
+    <ul id="navbar">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="Tienda.html">Tienda</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="Nosotros.html">Nosotros</a></li>
+      <li><a href="Contactanos.html">Contacto</a></li>
+      <li><a href="iniciarsesion.html">Iniciar Sesión</a></li>
+      <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+      <a href="#" id="close"><i class="far fa-times"></i></a>
+    </ul>
+  </div>
+  <div id="mobile">
+    <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+    <i id="bar" class="fas fa-outdent"></i>
+  </div>
+</section>
+
+<!-- FORMULARIO DE PAGO -->
+<section class="payment-fullscreen">
+  <div class="payment-card">
+    <h2>Detalles de Pago</h2>
+    <form action="confirmacion.html" method="post">
+      <div class="form-row">
+        <label for="cardName">Nombre del titular</label>
+        <input type="text" id="cardName" name="cardName" required />
+      </div>
+      <div class="form-row">
+        <label for="cardNumber">Número de tarjeta</label>
+        <input type="text" id="cardNumber" name="cardNumber" maxlength="19" required />
+      </div>
+      <div class="form-row triple">
+        <div>
+          <label for="expiry">Vencimiento</label>
+          <input type="text" id="expiry" name="expiry" maxlength="5" required />
+        </div>
+        <div>
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" name="cvv" maxlength="4" required />
+        </div>
+        <div>
+          <label for="zip">Código Postal</label>
+          <input type="text" id="zip" name="zip" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="address">Dirección</label>
+        <input type="text" id="address" name="address" required />
+      </div>
+      <div class="form-row">
+        <label for="country">País</label>
+        <select id="country" name="country" required>
+          <option value="">Selecciona tu país</option>
+          <option value="PE">Perú</option>
+          <option value="AR">Argentina</option>
+          <option value="CL">Chile</option>
+          <option value="MX">México</option>
+          <option value="ES">España</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-pay">Finalizar Pago</button>
+    </form>
+  </div>
+</section>
+
+
+
+<script>
+  // o. Declaración de variables y estructuras de datos
+  const camposRequeridos = ["cardName", "cardNumber", "expiry", "cvv", "zip", "address", "country"];
+
+  // p. Estructuras de control, validación con confirm y alert
+  document.querySelector("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const continuar = confirm("¿Deseas proceder con el pago?");
+    if (!continuar) {
+      alert("Pago cancelado.");
+      return;
+    }
+    let todosLlenos = true;
+    let valores = {};
+    camposRequeridos.forEach(id => {
+      const valor = document.getElementById(id).value.trim();
+      valores[id] = valor;
+      if (valor === "") todosLlenos = false;
+    });
+    if (!todosLlenos) {
+      alert("Por favor, completa todos los campos.");
+      return;
+    }
+    mostrarModal(valores);
+  });
+
+  // m, q. Manipulación del DOM: crear modal
+  function mostrarModal(datos) {
+    const modal = document.createElement("div");
+    modal.id = "modalResumen";
+    modal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-color: rgba(0,0,0,0.6); display: flex;
+      justify-content: center; align-items: center; z-index: 9999;
+    `;
+    modal.innerHTML = `
+      <div style="background: white; padding: 30px; border-radius: 15px; max-width: 400px; text-align: center;">
+        <h3>Resumen del Pago</h3>
+        <p><strong>Nombre:</strong> ${datos.cardName}</p>
+        <p><strong>Tarjeta:</strong> **** **** **** ${datos.cardNumber.slice(-4)}</p>
+        <p><strong>Dirección:</strong> ${datos.address}</p>
+        <p><strong>País:</strong> ${datos.country}</p>
+        <button onclick="cerrarModal()" style="margin-top: 15px; padding: 10px 20px; background-color: #10b981; color: white; border: none; border-radius: 8px;">Confirmar</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  function cerrarModal() {
+    const modal = document.getElementById("modalResumen");
+    if (modal) {
+      modal.remove();
+      alert("¡Gracias por tu compra!");
+      window.location.href = "index.html";
+    }
+  }
+
+  // n, r. Menú responsivo con DOM
+  const bar = document.getElementById('bar');
+  const nav = document.getElementById('navbar');
+  const close = document.getElementById('close');
+
+  if (bar) {
+    bar.addEventListener('click', () => {
+      nav.classList.add('active');
+    });
+  }
+
+  if (close) {
+    close.addEventListener('click', () => {
+      nav.classList.remove('active');
+    });
+  }
+</script>
+</body>
+</html>

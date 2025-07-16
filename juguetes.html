@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-commerce website - Juguetes</title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+  body {
+  background: #f8f9fa;
+  font-family: 'Arial', sans-serif;
+}
+
+#productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 30px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+  text-align: center;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-info h4 {
+  margin: 10px 0;
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.product-info h2 {
+  color: #e74c3c;
+  margin: 10px 0;
+  font-size: 22px;
+}
+
+.product-info p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.product-info select,
+.product-info input {
+  margin: 10px auto;
+  padding: 8px 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  appearance: none;
+}
+
+.product-info select {
+  background: #f1f1f1 url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
+  background-size: 12px;
+}
+
+.product-info button {
+  background-color: #009688;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.product-info button:hover {
+  background-color: #00796b;
+}
+
+  </style>
+</head>
+
+<body>
+  <section id="header">
+    <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Inicio</a></li>
+      
+   
+      <li><a class="active" href="Tienda.html">Tienda</a></li>
+       
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="Nosotros.html">Nosotros</a></li>
+        <li><a href="Alfareria.html">Reclamos</a></li>
+        <li><a href="Contactanos.html">Contacto</a></li>
+        <li><a href="iniciarsesion.html">Iniciar Sesion</a></li>
+        <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+        <a href="#" id="close"><i class="far fa-times"></i></a>
+      </ul>
+    </div>
+    <div id="mobile">
+      <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+      <i id="bar" class="fas fa-outdent"></i>
+    </div>
+  </section>
+
+  <section id="productos"></section>
+
+  <script>
+  // Intentar recuperar los productos de localStorage bajo clave 'juguetes'
+  let juguetes = [];
+
+ 
+if (localStorage.getItem("admin")) {
+  let admin = JSON.parse(localStorage.getItem("admin"));
+   juguetes = admin.filter(p => p.categoria === "Juguetes" && p.activo !== false);
+  } else {
+    juguetes = [
+      {
+        nombre: "Camión de Madera",
+        precio: 25.00,
+        imagen: "imagenes/imagenes/juguetes/camion.avif",
+        categoria: "Juguetes",
+        descripcion: "Material: Madera sólida tallada a mano, con detalles resistentes. Pintura: No tóxica (opcional). Diseño: Auténtico y encantador, ideal para niños y coleccionistas. Tamaño: 12 cm de largo × 6 cm de alto. Acabado: Lijado suave para evitar astillas. Colores: Naturales o vibrantes (a elección).",
+        activo: true
+      },
+      {
+        nombre: "Sonajeros para bebe",
+        precio: 65.00,
+        imagen: "imagenes/imagenes/juguetes/abaco.avif",
+        categoria: "Juguetes",
+        descripcion: "Material: Madera natural pulida, suave al tacto y segura para bebés. Pintura: Base al agua no tóxica (certificada EN-71). Sonido: Suave cascabeleo estimulante para los sentidos. Tamaño: 8 cm de diámetro (ideal para manitas pequeñas). Acabado: Superficie ultra-lisa sin astillas. Diseño: Formas redondeadas y coloridas para estimulación visual. Edad recomendada: 6+ meses.",
+        activo: true
+      },
+      {
+        nombre: "Camioncito verde",
+        precio: 41.90,
+        imagen: "imagenes/imagenes/juguetes/camioncito.avif",
+        categoria: "Juguetes",
+        descripcion: "Material: Madera de pino macizo, tallado artesanal libre de astillas. Color: Verde bosque con detalles en tonos naturales. Pintura: Base al agua no tóxica, certificada para juguetes. Dimensiones: 15 cm largo × 8 cm alto × 7 cm ancho. Ruedas: Madera con movimiento suave (no se desprenden). Acabado: Barniz ecológico de protección. Edad: Recomendado para 3+ años. Incluye: Caja de regalo ecológica con descripción del producto.",
+        activo: true
+      },
+      {
+        nombre: "Set dinosaurio",
+        precio: 34.65,
+        imagen: "imagenes/imagenes/juguetes/dinosaurio.avif",
+        categoria: "Juguetes",
+        descripcion: "Contenido: 1 dinosaurio de madera + 3 sonajeros integrados. Material: Madera de haya con acabado natural café claro. Sonajeros: Contienen cuentas de madera con sonido suave. Dimensiones: Dinosaurio 18 cm largo × 10 cm alto. Colores: Tono café natural con detalles en beige. Seguridad: Pintura al agua no tóxica (certificado EN-71). Edad: Recomendado 6+ meses. Extra: Superficie texturizada para estimulación táctil.",
+        activo: true
+      },
+      {
+        nombre: "Set figuritas",
+        precio: 58.25,
+        imagen: "imagenes/imagenes/juguetes/figuritas.jpg",
+        categoria: "Juguetes",
+        descripcion: "Contenido: 3 figuras talladas a mano (elefante 8cm + pájaro 5cm). Material: Madera de tilo natural con bordes redondeados. Colores: Tintes vegetales en azul cielo y café suave. Seguridad: Certificado ASTM F963 para juguetes infantiles. Edad: Ideal 3 a 6 años (sin piezas pequeñas). Estimula: Juego imaginativo y motricidad fina. Incluye: Bolsita de algodón para guardar las figuras. Extra: Superficie ligeramente texturizada para mejor agarre.",
+        activo: true
+      },
+      {
+        nombre: "Locomotora de trensito rojo",
+        precio: 63.25,
+        imagen: "imagenes/imagenes/juguetes/trencitomadera.jpg",
+        categoria: "Juguetes",
+        descripcion: "Material: Madera de arce con detalles en caucho natural. Color: Rojo brillante con detalles negros y plateados. Dimensiones: 25 cm largo × 8 cm alto × 6 cm ancho. Movilidad: Ruedas giratorias con ejes de acero inoxidable. Edad: Recomendado 5-12 años (resistente para juego activo). Seguridad: Barniz ecológico no tóxico (certificado EN-71-3). Funciones: Gancho remolque para vagones (vendidos por separado). Educativo: Incluye folleto sobre historia del ferrocarril.",
+        activo: true
+      }
+    ];
+
+    localStorage.setItem("juguetes", JSON.stringify(juguetes));
+  }
+
+  // Filtrar productos activos
+  const juguetesActivos = juguetes.filter(p => p.activo);
+
+  mostrarProductos(juguetesActivos);
+
+  function mostrarProductos(productos) {
+    const contenedor = document.getElementById("productos");
+    contenedor.innerHTML = "";
+
+    if (productos.length === 0) {
+      contenedor.innerHTML = "<h3>No hay productos cargados.</h3>";
+      return;
+    }
+
+    productos.forEach(prod => {
+      contenedor.innerHTML += `
+        <div class="product-card">
+          <img src="${prod.imagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagen+no+disponible';">
+          <div class="product-info">
+            <h4>${prod.nombre}</h4>
+            <h2>$${prod.precio.toFixed(2)}</h2>
+            <p>${prod.descripcion || 'Sin descripción disponible.'}</p>
+            <select>
+              <option disabled selected>Tamaño</option>
+              <option>Pequeño</option>
+              <option>Mediano</option>
+              <option>Grande</option>
+            </select>
+            <input type="number" value="1" min="1">
+            <button onclick="agregarAlCarrito('${prod.nombre}','${prod.imagen}', ${prod.precio}, this)">Agregar al carrito</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  function agregarAlCarrito(nombre, imagen, precio, elemento) {
+    alert(`Agregado al carrito:\n${nombre}\n$${precio.toFixed(2)}`);
+  }
+</script>
+
+
+</body>
+</html>

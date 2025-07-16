@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-commerce website</title>
+
+    <!-- font-awesome cdn link -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+<section id="header">
+        <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="Tienda.html">Tienda</a></li>
+               <li><a class="active" href="blog.html">Blog</a></li>
+                <li><a href="Nosotros.html">Nosotros</a></li>
+                
+            
+                <li><a href="Contactanos.html">Contacto</a></li>
+                  <li><a href="iniciarsesion.html">Iniciar Sesion</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <section id="page-header" class="blog-header">
+        <h2>Descubre más 
+
+        </h2>
+    </section>
+
+    <section id="blog">
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="images/imagenes/Alfareria/alafreria en parejas.jpg" alt="">
+            </div>
+            <div class="blog-details">
+                <h4>ALFARERIA EN EL PERU</h4>
+                <p> En esta nota te compartimos los lugares donde podras encontrar talleres de alfareria
+                </p>
+                <a href="https://elcomercio.pe/viu/actitud-viu/ceramica-y-vinos-conoce-esta-nueva-experiencia-para-disfrutar-con-amigos-en-lima-taller-de-ceramica-planes-en-lima-noticia/" target="_blank">IMFORMACION</a>
+            </div>
+           
+        </div>
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="images/imagenes/Alfareria/alfareria de campo.avif" alt="">
+            </div>
+            <div class="blog-details">
+                <h4>HISTORIA Y EVOLUCION</h4>
+                <p>Descubre como ha sido la evolucion de este arte
+                </p>
+                <a href="http://documentacion.cidap.gob.ec:8080/bitstream/cidap/1083/1/La%20artesan%C3%ADa%20en%20el%20Per%C3%BA%20en%20los%20%C3%BAltimos%2040%20a%C3%B1os-Madeleine%20Burns.pdf">IMFORMACION</a>
+            </div>
+         
+        </div>
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="images/imagenes/Alfareria/alfareria de fino.avif" alt="">
+            </div>
+            <div class="blog-details">
+                <h4>ALFARERIA DESDE CERO</h4>
+                <p>La alfarería fina es una categoría de cerámica elaborada con materiales de alta calidad y técnicas precisas que buscan un acabado delicado, estético y sofisticado. En el siguiente articulo descubriras los consejos que todo principiante deberia conocer. 
+                </p>
+                <a href="https://tallerceramicarte.com/blogs/noticias/consejos-ceramica-para-principiantes?srsltid=AfmBOopNTESsWqWNQMu8fGJaTUXUFBQPD3W39n2sTgNHDDRn1ocCrkMt">IMFORMACION</a>
+            </div>
+
+        </div>
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="images/imagenes/Alfareria/alfareria de jarrones.avif" alt="">
+            </div>
+            <div class="blog-details">
+                <h4>CUIDADO DE TUS PRODUCTOS</h4>
+                <p>Compartimos contigo una guia completa sobre como cuidar tus artesanias desde casa.
+
+                </p>
+                <a href="https://elrincondeartesania.com/guia-cuidado-de-figuras-artesanales/">IMFORMACION</a>
+            </div>
+    
+        </div>
+
+    </section>
+
+  
+<section id="newsletter" class="section-p1 section-m1">
+    <div class="newstext">
+        <h4>Suscríbete al boletín</h4>
+        <p>Recibe novedades por correo sobre nuestra tienda y <span>ofertas especiales.</span></p>
+    </div>
+    <div class="form">
+        <form onsubmit="return redirigirSuscripcion()">
+            <input type="email" id="correo-suscripcion" placeholder="Tu correo electrónico" required>
+            <button type="submit" class="normal">Suscribirse</button>
+        </form>
+    </div>
+</section>
+
+
+<!-- Script para el formulario de boletín -->
+<script>
+    function redirigirSuscripcion() {
+        const email = document.getElementById("correo-suscripcion").value;
+        if (email.trim() === "") {
+            alert("Por favor ingresa tu correo electrónico.");
+            return false;
+        }
+        // Redirigir al login
+        window.location.href = "iniciarsesion.html";
+        return false; // Evita que se recargue la página
+    }
+</script>
+
+<!-- Script original del formulario de reclamos (si lo estás usando también en esta página) -->
+<script>
+    const form = document.getElementById('reclamos-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const msg = document.getElementById('form-message');
+            msg.style.display = 'block';
+            this.reset();
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 3000);
+        });
+    }
+</script>
+
+
+   
+<footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="images/logo.png" alt="">
+            <h4>Contacto</h4>
+            <p><strong>Direccion:</strong> Arequipa, Peru</p>
+            <p><strong>Numero:</strong> +51 951235754</p>
+            <p><strong>Horario:</strong> L - S: 9:00 AM to 16:00 PM</p>
+            <div class="follow">
+                <h4>Siguenos</h4>
+                <div class="icon">
+                    <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.pinterest.com/" target="_blank" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h4>Nosotros</h4>
+            <a href="Nosotros.html">Nosotros</a>
+         
+            <a href="#">Política de privacidad</a>
+            <a href="terminos.html">Terminos y condiciones</a>
+            <a href="Contactanos.html">Contactanos</a>
+        </div>
+        <div class="col">
+            <h4>Mi cuenta</h4>
+            <a href="iniciarsesion.html">Iniciar sesion</a>
+            <a href="cart.html">Carrito</a>
+           
+         
+           
+        </div>
+        <div class="col install">
+            <h4>Instala nuestra app</h4>
+            <p>Desde App Store o Google Play</p>
+           <div class="row">
+                    <img src="images/pay/app.jpg" alt="" onclick="window.location.href='https://www.apple.com';" style="cursor: pointer;">
+                    <img src="images/pay/play.jpg" alt="" onclick="window.location.href='https://play.google.com';" style="cursor: pointer;">
+             </div>
+            <p>Metodos seguros de pago</p>
+            <img src="images/pay/pay.png" alt="">
+        </div>
+        <div class="copyright">
+            <p>Todos los derechos reservados | &#169; 2023</p>
+        </div>
+        <audio id="bgAudio">
+  <source src="sonidos/sonidobtn.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  document.addEventListener('click', function() {
+    const audio = document.getElementById('bgAudio');
+    audio.play().catch(e => console.log("Error al reproducir:", e));
+  });
+</script>
+    </footer>
+
+
+    <!-- javascript script file link -->
+    <script src="cart.js"></script>
+</body>
+
+</html>

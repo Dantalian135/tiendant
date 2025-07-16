@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito de Compras</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+  <!-- Estilo personalizado -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<section id="header">
+        <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html" >Inicio</a></li>
+                <li><a href="Tienda.html">Tienda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="Nosotros.html">Nosotros</a></li>
+              
+            
+                <li><a href="Contactanos.html">Contacto</a></li>
+                  <li><a href="iniciarsesion.html">IniciarSesion</a></li>
+                  <li><a href="admin.html">admin</a></li>
+                <li id="lg-bag"><a class="active"href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+  <section id="page-header" class="about-header">
+    <h2>#cart</h2>
+    <p>Agrega tu cupón y ahorra hasta un 70%!</p>
+  </section>
+
+  <section id="cart" class="section-p1">
+    <table width="100%">
+      <thead>
+        <tr>
+          <td>Eliminar</td>
+          <td>Imagen</td>
+          <td>Producto</td>
+          <td>Precio</td>
+          <td>Cantidad</td>
+          <td>Subtotal</td>
+        </tr>
+      </thead>
+      <tbody id="cart-items">
+        <!-- Aquí se insertarán los productos dinámicamente -->
+      </tbody>
+    </table>
+  </section>
+
+  <section id="cart-add" class="section-p1">
+   
+    </div>
+    <div class="subtotal">
+      <h3>Totales del carrito</h3>
+      <table>
+        <!-- Totales dinámicos aquí -->
+      </table>
+    <button class="normal" onclick="location.href='visa.html'">Proceder al pago</button>
+
+    </div>
+  </section>
+
+  <footer class="section-p1">
+    <div class="col">
+     
+      <h4>Contacto</h4>
+      <p><strong>Dirección:</strong> Arequipa, Perú</p>
+      <p><strong>Teléfono:</strong> +51 951235754</p>
+      <p><strong>Horario:</strong> L - S: 9:00 AM a 4:00 PM</p>
+      <div class="follow">
+        <h4>Síguenos</h4>
+        <div class="icon">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-pinterest-p"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h4>Nosotros</h4>
+      <a href="Nosotros.html">Nosotros</a>
+      <a href="terminos.html">Política de privacidad</a>
+      <a href="Contactanos.html">Contáctanos</a>
+    </div>
+
+    <div class="col">
+      <h4>Mi cuenta</h4>
+      <a href="iniciarsesion.html">Iniciar sesión</a>
+      <a href="cart.html">Carrito</a>
+    </div>
+
+    <div class="col install">
+      <h4>Instala nuestra app</h4>
+      <p>Desde App Store o Google Play</p>
+      <div class="row">
+        <img src="images/pay/app.jpg" alt="" onclick="window.location.href='https://www.apple.com';" style="cursor: pointer;">
+        <img src="images/pay/play.jpg" alt="" onclick="window.location.href='https://play.google.com';" style="cursor: pointer;">
+      </div>
+      <p>Métodos seguros de pago</p>
+      <img src="images/pay/pay.png" alt="">
+    </div>
+
+    <div class="copyright">
+      <p>Todos los derechos reservados | &#169; 2023</p>
+    </div>
+  </footer>
+
+  <!-- Script para funcionalidad adicional si lo tienes -->
+  <script src="script.js"></script>
+
+  <!-- Script del carrito -->
+  <script src="cart.js"></script>
+  <script>
+    cargarCarrito(); // Llama la función al cargar la página
+  </script>
+  <audio id="bgAudio">
+  <source src="sonidos/sonidobtn.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  document.addEventListener('click', function() {
+    const audio = document.getElementById('bgAudio');
+    audio.play().catch(e => console.log("Error al reproducir:", e));
+  });
+</script>
+
+</body>
+
+</html>

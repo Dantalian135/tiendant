@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-commerce website - Telares</title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 30px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+      text-align: center;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-info h4 {
+      margin: 10px 0;
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .product-info h2 {
+      color: #e74c3c;
+      margin: 10px 0;
+      font-size: 22px;
+    }
+
+    .product-info p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+      height: 60px;
+      overflow: hidden;
+    }
+
+    .product-info select,
+    .product-info input {
+      margin: 10px auto;
+      padding: 8px 10px;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      appearance: none;
+    }
+
+    .product-info select {
+      background: #f1f1f1 url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
+      background-size: 12px;
+    }
+
+    .product-info button {
+      background-color: #009688;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .product-info button:hover {
+      background-color: #00796b;
+    }
+  </style>
+</head>
+<body>
+
+  <section id="header">
+    <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Inicio</a></li>
+       
+        <li><a class="active" href="Tienda.html">Tienda</a></li>
+    
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="Nosotros.html">Nosotros</a></li>
+        <li><a href="Alfareria.html">Reclamos</a></li>
+        <li><a href="Contactanos.html">Contacto</a></li>
+        <li><a href="iniciarsesion.html">Iniciar Sesion</a></li>
+        <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+        <a href="#" id="close"><i class="far fa-times"></i></a>
+      </ul>
+    </div>
+    <div id="mobile">
+      <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+      <i id="bar" class="fas fa-outdent"></i>
+    </div>
+  </section>
+
+  <section id="productos"></section>
+
+  <script>
+    let telares = JSON.parse(localStorage.getItem("telares")) || [];
+
+
+if (localStorage.getItem("admin")) {
+  let admin = JSON.parse(localStorage.getItem("admin"));
+
+      telares = admin.filter(p => p.categoria === "Telares" && p.activo !== false);
+    } else {
+      telares = [
+        {
+          nombre: "Tejido de colores lana de alpaca gruesa",
+          precio: 63.00,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos2.avif",
+          categoria: "Telares",
+          descripcion: "Material: Lana de alpaca 100% gruesa y natural. Tinte: Pigmentos minerales en tonos verde musgo y café tierra. Diseño: Textura rústica con patrón lineal artesanal. Tamaño: 140 cm de ancho × 200 cm de largo. Acabado: Terminaciones anudadas a mano. Colores: Verde profundo y café cálido. Funcionalidad: Ideal para climas fríos, aislante térmico natural.",
+          activo: true
+        },
+        {
+          nombre: "Lana gruesa blanca",
+          precio: 56.50,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos3.avif",
+          categoria: "Telares",
+          descripcion: "Material: Lana 100% natural de oveja, hilada a mano. Color: Blanco crudo sin teñir. Textura: Densa y mullida con sensación cálida. Tamaño: 140 cm x 200 cm. Acabado: Bordes reforzados con flecos. Estilo: Minimalista y rústico. Funcionalidad: Alta capacidad térmica, ideal para invierno o decoración.",
+          activo: true
+        },
+        {
+          nombre: "Telar Blanco",
+          precio: 52.00,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos4.jpg",
+          categoria: "Telares",
+          descripcion: "Material: Mezcla de algodón y lana fina. Color: Blanco nieve. Tejido: Ligero y respirable. Dimensiones: 140 cm x 200 cm. Toque: Suave y delicado. Detalles: Flecos cortos en los extremos. Uso: Perfecto para cama individual, sofá o manta ligera. Mantenimiento: Lavar a mano o en ciclo suave.",
+          activo: true
+        },
+        {
+          nombre: "Telar grueso",
+          precio: 36.25,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos5.jpg",
+          categoria: "Telares",
+          descripcion: "Material: Madera de tilo natural. Colores: Tintes vegetales en café. Seguridad: Certificado ASTM F963. Extra: Superficie texturizada para mejor agarre.",
+          activo: true
+        },
+        {
+          nombre: "Telar blanco delgado",
+          precio: 53.55,
+          imagen: "imagenes/imagenes/tejidos o hilados/tejidos6.avif",
+          categoria: "Telares",
+          descripcion: "Material: Hilo de lana merino ligera. Color: Blanco puro sin teñir. Diseño: Tejido plano con patrón sutil. Tamaño: 130 cm x 190 cm. Textura: Delicada, transpirable y suave. Acabado: Bordes rematados a mano. Estilo: Ligero y versátil. Cuidados: Lavar a mano y secar en plano.",
+          activo: true
+        }
+      ];
+
+      localStorage.setItem("telares", JSON.stringify(telares));
+    }
+
+    const telaresActivos = telares.filter(p => p.categoria === "Telares" && p.activo !== false);
+
+    mostrarProductos(telaresActivos);
+
+    function mostrarProductos(productos) {
+      const contenedor = document.getElementById("productos");
+      contenedor.innerHTML = "";
+
+      if (productos.length === 0) {
+        contenedor.innerHTML = "<h3>No hay productos cargados.</h3>";
+        return;
+      }
+
+      productos.forEach(prod => {
+        contenedor.innerHTML += `
+          <div class="product-card">
+            <img src="${prod.imagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagen+No+Disponible';">
+            <div class="product-info">
+              <h4>${prod.nombre}</h4>
+              <h2>$${prod.precio.toFixed(2)}</h2>
+              <p>${prod.descripcion || 'Sin descripción disponible.'}</p>
+              <select>
+                <option>Pequeño</option>
+                <option>Mediano</option>
+                <option>Grande</option>
+              </select>
+              <input type="number" value="1" min="1">
+              <button onclick="agregarAlCarrito('${prod.nombre}','${prod.imagen}', ${prod.precio}, this)">Agregar al carrito</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function agregarAlCarrito(nombre, imagen, precio, elemento) {
+      alert(`Agregado al carrito:\n${nombre}\n$${precio.toFixed(2)}`);
+    }
+</script>
+
+
+</body>
+</html>

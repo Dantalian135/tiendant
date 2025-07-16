@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="esp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-commerce website</title>
+
+    <!-- font-awesome cdn link -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 30px;
+      border: 1px solid #888;
+      width: 300px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: black;
+    }
+    button.normal {
+  color: #000; /* negro, o el color que quieras */
+  background-color: #fff; /* blanco o el que prefieras */
+  border: 1px solid #79ff0b; /* opcional, bordes verdes como tu input */
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.normal:hover {
+  background-color: #79ff0b;
+  color: #000;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <section id="header">
+ 
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a class="active" href="Tienda.html">Tienda</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="Nosotros.html">Nosotros</a></li>
+       
+        <li><a href="Contactanos.html">Contacto</a></li>
+        <li><a href="iniciarsesion.html">Iniciar Sesión</a></li>
+        <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+        <a href="#" id="close"><i class="far fa-times"></i></a>
+      </ul>
+    </div>
+    <div id="mobile">
+      <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+      <i id="bar" class="fas fa-outdent"></i>
+    </div>
+  </section>
+
+<body>
+
+ 
+
+  <section id="page-header">
+  <h2>#Tienda online</h2>
+  <p>Puedes comprar desde cualquier lugar.</p>
+  <div style="position: relative; margin-top: 20px;">
+  <input type="text" id="barraBusqueda" placeholder="Buscar producto..." style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #79ff0b;">
+  <button class="normal" onclick="buscarEnTodasLasPaginas()">Buscar</button>
+  <div id="sugerencias"></div>
+</div>
+
+</section>
+
+<div id="resultadosBusqueda" style="margin-top: 20px; display: none;">
+  <div class="resultados-grid" 
+       style="display: flex; gap: 20px; flex-wrap: wrap;"></div>
+</div>
+
+
+      </section>
+    
+    <section id="crudSection" class="section-p1" style="display:none;">
+    <h2>Gestión de Productos</h2>
+    <input type="text" id="nombreProducto" placeholder="Nombre del producto" />
+    <input type="text" id="precioProducto" placeholder="Precio" />
+    <button class="normal" onclick="insertarProducto()">Insertar</button><br><br>
+    <input type="text" id="buscarProducto" placeholder="Buscar por nombre" />
+    <button class="normal" onclick="buscarProducto()">Buscar</button><br><br>
+    <div id="productosListados"></div>
+  </section>
+
+    <section id="product1" class="section-p1">
+        <div class="pro-container">
+            <div class="pro" onclick="window.location.href='singleProduct.html';">
+                <img src="images/imagenes/Ceramicos/2a.jpg" alt="">
+                <div class="des">
+                    <span>Ceramica</span>
+                    <h5>Ceramica de piedras</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                   
+                </div>
+                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="eliminar-estatico" style="display:none;" onclick="eliminarProductoEstatico(this)">Eliminar</button>
+
+              </div>
+            <div class="pro"onclick="window.location.href='Muebles.html';">
+                <img src="images/imagenes/muebleria rustica/2a.jpg" alt="">
+                <div class="des">
+                    <span>Muebles</span>
+                    <h5>Muebles rusticos</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                   
+                </div>
+                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="eliminar-estatico" style="display:none;" onclick="eliminarProductoEstatico(this)">Eliminar</button>
+                
+              </div>
+            <div class="pro"onclick="window.location.href='telares.html';">
+                <img src="images/imagenes/tejidos o hilados/2a.jpeg" alt="">
+                <div class="des">
+                    <span>Tejidos</span>
+                    <h5>Tejidos de lana </h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                </div>
+                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="eliminar-estatico" style="display:none;" onclick="eliminarProductoEstatico(this)">Eliminar</button>
+
+              </div>
+            <div class="pro"onclick="window.location.href='Juguetes.html';">
+                <img src="images/imagenes/Juguetes/2a.jpeg" alt="">
+                <div class="des">
+                    <span>Juguetes</span>
+                    <h5>Juguetes de Madera</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                </div>
+                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="eliminar-estatico" style="display:none;" onclick="eliminarProductoEstatico(this)">Eliminar</button>
+
+              </div>
+            <div class="pro"onclick="window.location.href='camarustica.html';">
+                <img src="images/imagenes/muebleria rustica/cama con decoracion rustica.jpg" alt="">
+                <div class="des">
+                    <span>camas rustiscas</span>
+                    <h5>camas rusticas </h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                   
+                </div>
+                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="eliminar-estatico" style="display:none;" onclick="eliminarProductoEstatico(this)">Eliminar</button>
+              </div>
+            <div class="pro"onclick="window.location.href='roperorustico.html';">          
+                <img src="images/imagenes/roperos/2a.jpg" alt="">
+                <div class="des">
+                    <span>Roperos</span>
+                    <h5>Roperos rusticos</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                   
+                </div>
+                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="eliminar-estatico" style="display:none;" onclick="eliminarProductoEstatico(this)">Eliminar</button>
+
+              </div>
+            <div class="pro"onclick="window.location.href='macetarustica.html';">          
+            
+                <img src="images/imagenes/macetas/2a.jpeg" alt="">
+                <div class="des">
+                    <span>Macetas</span>
+                    <h5>Macetas rusticas</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                   
+                </div>
+                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="eliminar-estatico" style="display:none;" onclick="eliminarProductoEstatico(this)">Eliminar</button>
+
+              </div>
+            <div class="pro"onclick="window.location.href='utensiliosartesanales.html';">          
+            
+                <img src="images/imagenes/utensillos rusticos/2a.jpeg" alt="">
+                <div class="des">
+                    <span>utensilios</span>
+                    <h5>Utensilios rusticos</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                </div>
+                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <button class="eliminar-estatico" style="display:none;" onclick="eliminarProductoEstatico(this)">Eliminar</button>
+              </div>
+           
+            <div class="pro-container" id="productosDinamicos"></div>
+    </section>
+
+    <div id="adminModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarLoginAdmin()">&times;</span>
+      <h2>Acceso para Administrador</h2>
+      <input type="text" id="loginUser" placeholder="Usuario"><br><br>
+      <input type="password" id="loginPass" placeholder="Contraseña"><br><br>
+      <button class="normal" onclick="adminLogin()">Ingresar</button>
+      <p id="loginError" style="color:red;"></p>
+    </div>
+  </div>
+
+  <section id="newsletter" class="section-p1 section-m1">
+    <div class="newstext">
+        <h4>Suscríbete al boletín</h4>
+        <p>Recibe novedades por correo sobre nuestra tienda y <span>ofertas especiales.</span></p>
+    </div>
+    <div class="form">
+        <form onsubmit="return redirigirSuscripcion()">
+            <input type="email" id="correo-suscripcion" placeholder="Tu correo electrónico" required>
+            <button type="submit" class="normal">Suscribirse</button>
+        </form>
+    </div>
+</section>
+<footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="images/logo.png" alt="">
+            <h4>Contacto</h4>
+            <p><strong>Direccion:</strong> Arequipa, Peru</p>
+            <p><strong>Numero:</strong> +51 951235754</p>
+            <p><strong>Horario:</strong> L - S: 9:00 AM to 16:00 PM</p>
+            <div class="follow">
+                <h4>Siguenos</h4>
+                <div class="icon">
+                    <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.pinterest.com/" target="_blank" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h4>Nosotros</h4>
+            <a href="Nosotros.html">Nosotros</a>
+         
+            <a href="#">Política de privacidad</a>
+            <a href="terminos.html">Terminos y condiciones</a>
+            <a href="Contactanos.html">Contactanos</a>
+        </div>
+        <div class="col">
+            <h4>Mi cuenta</h4>
+            <a href="iniciarsesion.html">Iniciar sesion</a>
+            <a href="cart.html">Carrito</a>
+           
+         
+           
+        </div>
+        <div class="col install">
+            <h4>Instala nuestra app</h4>
+            <p>Desde App Store o Google Play</p>
+           <div class="row">
+                    <img src="images/pay/app.jpg" alt="" onclick="window.location.href='https://www.apple.com';" style="cursor: pointer;">
+                    <img src="images/pay/play.jpg" alt="" onclick="window.location.href='https://play.google.com';" style="cursor: pointer;">
+             </div>
+            <p>Metodos seguros de pago</p>
+            <img src="images/pay/pay.png" alt="">
+        </div>
+        <div class="copyright">
+            <p>Todos los derechos reservados | &#169; 2023</p>
+        </div>
+       
+    </footer>
+
+<audio id="bgAudio">
+  <source src="sonidos/sonidobtn.mp3" type="audio/mpeg">
+</audio>
+<div id="resultadosBusqueda" style="margin-top: 20px; display:none;">
+  <div class="resultados-grid"></div>
+</div>
+
+</section>
+
+
+<script>
+window.onload = function() {
+  document.addEventListener('click', function () {
+    const audio = document.getElementById('bgAudio');
+    if (audio) {
+      audio.play().catch(e => console.log("Error al reproducir:", e));
+    }
+  });
+
+  cargarProductosDesdeLocalStorage();
+};
+
+function abrirLoginAdmin() {
+  document.getElementById("adminModal").style.display = "block";
+}
+
+function cerrarLoginAdmin() {
+  document.getElementById("adminModal").style.display = "none";
+}
+
+window.onclick = function (event) {
+  const modal = document.getElementById("adminModal");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
+function adminLogin() {
+  const usuario = document.getElementById("loginUser").value;
+  const clave = document.getElementById("loginPass").value;
+  const error = document.getElementById("loginError");
+
+  if (usuario === "admin" && clave === "12345") {
+    cerrarLoginAdmin();
+    document.getElementById("crudSection").style.display = "block";
+    mostrarProductos();
+    mostrarBotonesEliminar();
+    alert("Bienvenido, Administrador");
+  } else {
+    error.textContent = "Usuario o contraseña incorrectos";
+  }
+}
+
+function insertarProducto() {
+  const nombre = document.getElementById("nombreProducto").value;
+  const precio = document.getElementById("precioProducto").value;
+
+  if (!nombre || !precio) return alert("Completa los campos");
+
+  let productos = JSON.parse(localStorage.getItem("productos")) || [];
+  productos.push({ nombre, precio });
+  localStorage.setItem("productos", JSON.stringify(productos));
+  mostrarProductos();
+  cargarProductosDesdeLocalStorage();
+}
+
+function eliminarProductoEstatico(btn) {
+  const producto = btn.closest('.pro');
+  if (producto) {
+    producto.remove();
+  }
+}
+
+function mostrarBotonesEliminar() {
+  const botones = document.querySelectorAll(".eliminar-estatico");
+  botones.forEach(btn => btn.style.display = "block");
+}
+
+function mostrarProductos() {
+  const contenedor = document.getElementById("productosListados");
+  contenedor.innerHTML = "";
+  const productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+  productos.forEach((p, i) => {
+    contenedor.innerHTML += `
+      <div>
+        <b>${p.nombre}</b> - $${p.precio}
+        <button onclick="editarProducto(${i})">Editar</button>
+        <button onclick="eliminarProducto(${i})">Eliminar</button>
+      </div>
+    `;
+  });
+}
+
+function buscarProducto() {
+  const nombre = document.getElementById("buscarProducto").value.toLowerCase();
+  const productos = JSON.parse(localStorage.getItem("productos")) || [];
+  const encontrados = productos.filter(p => p.nombre.toLowerCase().includes(nombre));
+
+  const contenedor = document.getElementById("productosListados");
+  contenedor.innerHTML = "";
+  encontrados.forEach((p, i) => {
+    contenedor.innerHTML += `
+      <div>
+        <b>${p.nombre}</b> - $${p.precio}
+        <button onclick="editarProducto(${i})">Editar</button>
+        <button onclick="eliminarProducto(${i})">Eliminar</button>
+      </div>
+    `;
+  });
+}
+
+function eliminarProducto(index) {
+  let productos = JSON.parse(localStorage.getItem("productos")) || [];
+  productos.splice(index, 1);
+  localStorage.setItem("productos", JSON.stringify(productos));
+  mostrarProductos();
+  cargarProductosDesdeLocalStorage();
+}
+
+function editarProducto(index) {
+  let productos = JSON.parse(localStorage.getItem("productos")) || [];
+  const nuevoNombre = prompt("Nuevo nombre:", productos[index].nombre);
+  const nuevoPrecio = prompt("Nuevo precio:", productos[index].precio);
+
+  if (nuevoNombre && nuevoPrecio) {
+    productos[index] = { nombre: nuevoNombre, precio: nuevoPrecio };
+    localStorage.setItem("productos", JSON.stringify(productos));
+    mostrarProductos();
+    cargarProductosDesdeLocalStorage();
+  }
+}
+
+
+
+function redirigirSuscripcion() {
+  const email = document.getElementById("correo-suscripcion").value;
+  if (email.trim() === "") {
+    alert("Por favor ingresa tu correo electrónico.");
+    return false;
+  }
+  window.location.href = "iniciarsesion.html";
+  return false;
+}
+const productosTotales = [
+  // --- Piedras ---
+  { 
+    nombre: "Piedra Granito", 
+    precio: 139.00, 
+    enlace: "singleProduct.html", 
+    imagen: "images/imagenes/Ceramicos/ceramico pidra granito.avif" 
+  },
+  { 
+    nombre: "Piedra Lisa", 
+    precio: 362.00, 
+    enlace: "singleProduct.html", 
+    imagen: "images/imagenes/Ceramicos/ceramico piedra lisa.avif" 
+  },
+  { 
+    nombre: "Piedra Blanca", 
+    precio: 249.00, 
+    enlace: "singleProduct.html", 
+    imagen: "images/imagenes/Ceramicos/ceramico piedra blanca.avif" 
+  },
+  { 
+    nombre: "Piedra Geo", 
+    precio: 569.00, 
+    enlace: "singleProduct.html", 
+    imagen: "images/imagenes/Ceramicos/ceramico piedra geo.avif" 
+  },
+  { 
+    nombre: "Piedra Jarka", 
+    precio: 520.00, 
+    enlace: "singleProduct.html", 
+    imagen: "images/imagenes/Ceramicos/ceramico piedra jarka.avif" 
+  },
+  { 
+    nombre: "Piedra Laja", 
+    precio: 623.00, 
+    enlace: "singleProduct.html", 
+    imagen: "images/imagenes/Ceramicos/ceramico piedra laja.avif" 
+  },
+  { 
+    nombre: "Ceramico Piedra", 
+    precio: 521.00, 
+    enlace: "singleProduct.html", 
+    imagen: "images/imagenes/Ceramicos/ceramico tipo piedra.avif" 
+  },
+
+  // --- Tejidos / Telares ---
+  { 
+    nombre: "tejido de colores lana de alpaca gruesa", 
+    precio: 63.00, 
+    enlace: "telares.html", 
+    imagen: "imagenes/imagenes/tejidos o hilados/tejidos2.avif" 
+  },
+  { 
+    nombre: "lana gruesa blanca", 
+    precio: 56.50, 
+    enlace: "telares.html", 
+    imagen: "imagenes/imagenes/tejidos o hilados/tejidos3.avif" 
+  },
+  { 
+    nombre: "telar Blanco", 
+    precio: 52.00, 
+    enlace: "telares.html", 
+    imagen: "imagenes/imagenes/tejidos o hilados/tejidos4.jpg" 
+  },
+  { 
+    nombre: "telar grueso", 
+    precio: 36.25, 
+    enlace: "telares.html", 
+    imagen: "imagenes/imagenes/tejidos o hilados/tejidos5.jpg" 
+  },
+  { 
+    nombre: "telar blanco delgado", 
+    precio: 53.55, 
+    enlace: "telares.html", 
+    imagen: "imagenes/imagenes/tejidos o hilados/tejidos6.avif" 
+  },
+
+  // --- Roperos ---
+  { 
+    nombre: "Ropero Madera Natural", 
+    precio: 520.00, 
+    enlace: "roperorustico.html", 
+    imagen: "imagenes/123.jpg" 
+  },
+  { 
+    nombre: "Ropero Tallado a Mano", 
+    precio: 680.00, 
+    enlace: "roperorustico.html", 
+    imagen: "imagenes/789.jpg" 
+  },
+  { 
+    nombre: "Ropero Rústico Blanco", 
+    precio: 610.00, 
+    enlace: "roperorustico.html", 
+    imagen: "imagenes/159.jpg" 
+  },
+  { 
+    nombre: "Ropero de Troncos", 
+    precio: 720.00, 
+    enlace: "roperorustico.html", 
+    imagen: "imagenes/120.jpg" 
+  },
+  { 
+    nombre: "Ropero Estilo Industrial", 
+    precio: 650.00, 
+    enlace: "roperorustico.html", 
+    imagen: "imagenes/h7.jpg" 
+  },
+
+  // --- Macetas ---
+  { 
+    nombre: "Maceta Madera Natural", 
+    precio: 45.00, 
+    enlace: "macetarustica.html", 
+    imagen: "imagenes/mm.jpg" 
+  },
+  { 
+    nombre: "Maceta Tallada a Mano", 
+    precio: 65.00, 
+    enlace: "macetarustica.html", 
+    imagen: "imagenes/md.jpg" 
+  },
+  { 
+    nombre: "Maceta Rústica Blanca", 
+    precio: 55.00, 
+    enlace: "macetarustica.html", 
+    imagen: "imagenes/mb.jpg" 
+  },
+  { 
+    nombre: "Maceta de Tronco Natural", 
+    precio: 70.00, 
+    enlace: "macetarustica.html", 
+    imagen: "imagenes/mt.avif" 
+  },
+  { 
+    nombre: "Maceta Estilo Industrial", 
+    precio: 60.00, 
+    enlace: "macetarustica.html", 
+    imagen: "imagenes/mc.jpg" 
+  },
+
+  // --- Camas ---
+  { 
+    nombre: "Cama Madera Natural", 
+    precio: 680.00, 
+    enlace: "camarustica.html", 
+    imagen: "images/imagenes/muebleria rustica/cama con decoracion rustica.jpg" 
+  },
+  { 
+    nombre: "Cama Madera Tallada", 
+    precio: 820.00, 
+    enlace: "camarustica.html", 
+    imagen: "images/imagenes/muebleria rustica/cama rustica.avif" 
+  },
+  { 
+    nombre: "Cama Rústica Blanca", 
+    precio: 750.00, 
+    enlace: "camarustica.html", 
+    imagen: "imagenes/sd.jpg" 
+  },
+  { 
+    nombre: "Cama de Troncos", 
+    precio: 900.00, 
+    enlace: "camarustica.html", 
+    imagen: "imagenes/85.jpg" 
+  },
+  { 
+    nombre: "Cama Estilo Rústico Industrial", 
+    precio: 790.00, 
+    enlace: "camarustica.html", 
+    imagen: "imagenes/86.jpg" 
+  }
+
+];
+function buscarEnTodasLasPaginas() {
+  const texto = document.getElementById("barraBusqueda").value.toLowerCase().trim();
+  const contenedor = document.getElementById("resultadosBusqueda");
+  const grid = contenedor.querySelector(".resultados-grid");
+
+  grid.innerHTML = "";
+
+  if (texto === "") {
+    contenedor.style.display = "none";
+    return;
+  }
+
+  const resultados = productosTotales.filter(p =>
+    p.nombre.toLowerCase().includes(texto)
+  );
+
+  if (resultados.length === 0) {
+    grid.innerHTML = "<p>No se encontraron resultados.</p>";
+    contenedor.style.display = "block";
+    contenedor.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+ 
+  contenedor.style.display = "block";
+  contenedor.scrollIntoView({ behavior: "smooth" });
+}
+
+
+
+document.getElementById("barraBusqueda").addEventListener("input", function() {
+  const texto = this.value.toLowerCase().trim();
+  const contenedor = document.getElementById("sugerencias");
+  contenedor.innerHTML = "";
+
+  if (texto === "") {
+    contenedor.style.display = "none";
+    return;
+  }
+
+  // Filtrar productos que empiecen o contengan lo escrito
+  const coincidencias = productosTotales.filter(p =>
+    p.nombre.toLowerCase().includes(texto)
+  );
+
+  if (coincidencias.length === 0) {
+    contenedor.style.display = "none";
+    return;
+  }
+
+  coincidencias.forEach(p => {
+    const div = document.createElement("div");
+    div.textContent = p.nombre;
+    div.onclick = () => {
+      document.getElementById("barraBusqueda").value = p.nombre;
+      contenedor.style.display = "none";
+      buscarEnTodasLasPaginas();
+    };
+    contenedor.appendChild(div);
+  });
+
+  contenedor.style.display = "block";
+});
+const inputBusqueda = document.getElementById("barraBusqueda");
+const contenedorSugerencias = document.getElementById("sugerencias");
+
+inputBusqueda.addEventListener("input", function() {
+  const texto = this.value.toLowerCase().trim();
+  contenedorSugerencias.innerHTML = "";
+
+  if (texto === "") {
+    contenedorSugerencias.style.display = "none";
+    return;
+  }
+
+  const coincidencias = productosTotales.filter(p =>
+    p.nombre.toLowerCase().includes(texto)
+  );
+
+  if (coincidencias.length === 0) {
+    contenedorSugerencias.style.display = "none";
+    return;
+  }
+
+  coincidencias.forEach(p => {
+    const div = document.createElement("div");
+    div.textContent = p.nombre;
+    div.onclick = () => {
+      inputBusqueda.value = p.nombre;
+      contenedorSugerencias.style.display = "none";
+      buscarEnTodasLasPaginas();
+    };
+    contenedorSugerencias.appendChild(div);
+  });
+
+  contenedorSugerencias.style.display = "block";
+});
+
+// Para ocultar sugerencias si se hace clic fuera
+document.addEventListener("click", function(e) {
+  if (!contenedorSugerencias.contains(e.target) && e.target !== inputBusqueda) {
+    contenedorSugerencias.style.display = "none";
+  }
+});
+
+
+</script>
+
+
+
+
+
+
+    <!-- javascript script file link -->
+    <script src="script.js"></script>
+</body>
+
+</html>

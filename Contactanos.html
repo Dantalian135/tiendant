@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-commerce website</title>
+
+    <!-- font-awesome cdn link -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section id="header">
+        <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="Tienda.html">Tienda</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="Nosotros.html">Nosotros</a></li>
+                
+                <li><a class="active" href="Contactanos.html">Contacto</a></li>
+                <li><a href="iniciarsesion.html">Iniciar Sesion</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <section id="page-header" class="about-header">
+        <h2>CONTACTANOS</h2>
+        <p>NUESTROS PRINCIPALES MEDIOS DE COMUNICACION</p>
+    </section>
+
+    <section id="contact-details" class="section-p1">
+        <div class="details">
+            <span>UBICACION</span>
+            <h2>Visitanos en alguna de nuestras sedes a nivel nacional</h2>
+            <h3>Sede principal</h3>
+            <div>
+                <li>
+                    <i class="fas fa-map"></i>
+                    <p>Arequipa, Peru</p>
+                </li>
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <p>artesania_1@gmail.com</p>
+                </li>
+                <li>
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+51 951235754</p>
+                </li>
+                <li>
+                    <i class="fas fa-clock"></i>
+                    <p>Lunes a Sabado: 9:00 AM to 16:00 PM</p>
+                </li>
+            </div>
+        </div>
+        <div class="map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.5954301722372!2d-71.53993114829062!3d-16.394558925573527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424a50404d79e5%3A0xd3ea04106e51c312!2sArtesanias%20El%20Fundito!5e0!3m2!1ses-419!2spe!4v1748318730492!5m2!1ses-419!2spe"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <section id="form-details">
+        <form id="contact-form">
+            <span>Dejanos tus datos</span>
+            <h2>Estaremos felices de atenderte</h2>
+            <input type="text" id="nombre" placeholder="Nombre">
+            <input type="text" id="correo" placeholder="Correo Electronico">
+            <input type="text" id="asunto" placeholder="Asunto">
+            <textarea id="mensaje" cols="30" rows="10" placeholder="Mensaje"></textarea>
+            <button type="submit" class="normal">Enviar</button>
+            <p id="form-msg" style="color: red; margin-top: 10px;"></p>
+        </form>
+    </section>
+
+    </script>
+
+<!-- Script original del formulario de reclamos (si lo estás usando también en esta página) -->
+<script>
+    const form = document.getElementById('reclamos-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const msg = document.getElementById('form-message');
+            msg.style.display = 'block';
+            this.reset();
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 3000);
+        });
+    }
+</script>
+
+
+   
+<footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="images/logo.png" alt="">
+            <h4>Contacto</h4>
+            <p><strong>Direccion:</strong> Arequipa, Peru</p>
+            <p><strong>Numero:</strong> +51 951235754</p>
+            <p><strong>Horario:</strong> L - S: 9:00 AM to 16:00 PM</p>
+            <div class="follow">
+                <h4>Siguenos</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h4>Nosotros</h4>
+            <a href="#">Nosotros</a>
+         
+            <a href="#">Política de privacidad</a>
+            <a href="#">Terminos y condiciones</a>
+            <a href="#">Contactanos</a>
+        </div>
+        <div class="col">
+            <h4>Mi cuenta</h4>
+            <a href="#">Iniciar sesion</a>
+            <a href="#">Carrito</a>
+           
+         
+           
+        </div>
+        <div class="col install">
+            <h4>Instala nuestra app</h4>
+            <p>Desde App Store o Google Play</p>
+           <div class="row">
+                    <img src="images/pay/app.jpg" alt="" onclick="window.location.href='https://www.apple.com';" style="cursor: pointer;">
+                    <img src="images/pay/play.jpg" alt="" onclick="window.location.href='https://play.google.com';" style="cursor: pointer;">
+             </div>
+            <p>Metodos seguros de pago</p>
+            <img src="images/pay/pay.png" alt="">
+        </div>
+        <div class="copyright">
+            <p>Todos los derechos reservados | &#169; 2023</p>
+        </div>
+        <audio id="bgAudio">
+  <source src="sonidos/sonidobtn.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  document.addEventListener('click', function() {
+    const audio = document.getElementById('bgAudio');
+    audio.play().catch(e => console.log("Error al reproducir:", e));
+  });
+</script>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function (e) {
+            e.preventDefault(); // Evita que se recargue la página
+
+            const nombre = document.getElementById("nombre").value.trim();
+            const correo = document.getElementById("correo").value.trim();
+            const asunto = document.getElementById("asunto").value.trim();
+            const mensaje = document.getElementById("mensaje").value.trim();
+            const msg = document.getElementById("form-msg");
+
+            if (!nombre || !correo || !asunto || !mensaje) {
+                msg.style.color = "red";
+                msg.textContent = "Por favor, complete todos los campos.";
+            } else {
+                msg.style.color = "green";
+                msg.textContent = "¡Mensaje enviado exitosamente!";
+                document.getElementById("contact-form").reset();
+            }
+        });
+    </script>
+
+    <script src="cart.js"></script>
+</body>
+</html>

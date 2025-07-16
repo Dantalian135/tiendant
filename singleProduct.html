@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-commerce website - Cerámicos</title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 30px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+      text-align: center;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-info h4 {
+      margin: 10px 0;
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .product-info h2 {
+      color: #e74c3c;
+      margin: 10px 0;
+      font-size: 22px;
+    }
+
+    .product-info p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+      height: 60px;
+      overflow: hidden;
+    }
+
+    .product-info select,
+    .product-info input {
+      margin: 10px auto;
+      padding: 8px 10px;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      appearance: none;
+    }
+
+    .product-info select {
+      background: #f1f1f1 url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
+      background-size: 12px;
+    }
+
+    .product-info button {
+      background-color: #009688;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .product-info button:hover {
+      background-color: #00796b;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="header">
+    <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a class="active" href="tienda.html">tienda</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="Nosotros.html">Nosotros</a></li>
+        <li><a href="Alfareria.html">Reclamos</a></li>
+        <li><a href="Contactanos.html">Contacto</a></li>
+        <li><a href="iniciarsesion.html">Iniciar Sesion</a></li>
+        <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+        <a href="#" id="close"><i class="far fa-times"></i></a>
+      </ul>
+    </div>
+    <div id="mobile">
+      <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+      <i id="bar" class="fas fa-outdent"></i>
+    </div>
+  </section>
+
+  <section id="productos"></section>
+
+  <script>
+    let ceramicos = JSON.parse(localStorage.getItem("ceramicos")) || [];
+if (localStorage.getItem("admin")) {
+  let admin = JSON.parse(localStorage.getItem("admin"));
+ceramicos = admin.filter(p => p.categoria === "Ceramicos" && p.activo !== false);
+
+} else{
+      ceramicos = [
+        {
+          nombre: "Piedra Granito",
+          precio: 139.00,
+          imagen: "images/imagenes/Ceramicos/ceramico pidra granito.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra de granito es una opción ideal para quienes buscan durabilidad, elegancia y un acabado atemporal. Extraída de canteras naturales, esta roca ígnea se caracteriza por su alta resistencia al desgaste, al calor y a la humedad, lo que la convierte en la elección perfecta para encimeras, pisos, fachadas, escaleras y más.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Lisa",
+          precio: 362.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra lisa.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra lisa destaca por su superficie perfectamente pulida y uniforme que refleja elegancia y sofisticación. Su acabado suave al tacto y su brillo natural la convierten en una opción premium para espacios selectos.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Blanca",
+          precio: 249.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra blanca.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra blanca es un material natural de gran elegancia y pureza visual. Perfecta para revestimientos, suelos, jardines y elementos decorativos que requieren un toque sofisticado.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Geo",
+          precio: 569.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra geo.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra geo se caracteriza por sus formas geométricas definidas y patrones naturales que crean efectos visuales modernos y contemporáneos.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Jarka",
+          precio: 520.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra jarka.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra jarka es reconocida por su textura rugosa y colores ocres hasta rojizos. Ideal para ambientes rústicos y naturales.",
+          activo: true
+        },
+        {
+          nombre: "Piedra Laja",
+          precio: 623.00,
+          imagen: "images/imagenes/Ceramicos/ceramico piedra laja.avif",
+          categoria: "Ceramicos",
+          descripcion: "La piedra laja se distingue por su superficie plana y textura rugosa. Resistente y duradera, perfecta incluso en climas extremos.",
+          activo: true
+        },
+        {
+          nombre: "Ceramico Piedra",
+          precio: 521.00,
+          imagen: "images/imagenes/Ceramicos/ceramico tipo piedra.avif",
+          categoria: "Ceramicos",
+          descripcion: "Apariencia natural con textura que simula piedra real. Alta resistencia y superficie antideslizante. Ideal para interiores y exteriores.",
+          activo: true
+        }
+      ];
+
+      localStorage.setItem("ceramicos", JSON.stringify(ceramicos));
+    }
+
+    const ceramicosActivos = ceramicos.filter(p => p.categoria === "Ceramicos" && p.activo !== false);
+
+    mostrarProductos(ceramicosActivos);
+
+    function mostrarProductos(productos) {
+      const contenedor = document.getElementById("productos");
+      contenedor.innerHTML = "";
+
+      if (productos.length === 0) {
+        contenedor.innerHTML = "<h3>No hay productos cargados.</h3>";
+        return;
+      }
+
+      productos.forEach(prod => {
+        contenedor.innerHTML += `
+          <div class="product-card">
+            <img src="${prod.imagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagen+No+Disponible';">
+            <div class="product-info">
+              <h4>${prod.nombre}</h4>
+              <h2>$${prod.precio.toFixed(2)}</h2>
+              <p>${prod.descripcion || 'Sin descripción disponible.'}</p>
+              <select>
+                <option disabled selected>Seleccione tamaño</option>
+                <option>15x15 cm</option>
+                <option>20x20 cm</option>
+                <option>30x30 cm</option>
+                <option>30x60 cm (rectangular)</option>
+                <option>60x60 cm</option>
+              </select>
+              <input type="number" value="1" min="1">
+              <button onclick="agregarAlCarrito('${prod.nombre}','${prod.imagen}', ${prod.precio}, this)">Agregar al carrito</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function agregarAlCarrito(nombre, imagen, precio, elemento) {
+      alert(`Agregado al carrito:\n${nombre}\n$${precio.toFixed(2)}`);
+    }
+</script>
+
+
+</body>
+
+</html>
