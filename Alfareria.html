@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reclamos - Tienda de Alfarería</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .reclamos-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .reclamos-container h2 {
+      font-family: 'Poppins', sans-serif;
+      color: #088178;
+      text-align: center;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-group label {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group button {
+      background: #088178;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .form-group button:hover {
+      background: #06635d;
+    }
+
+    .form-message {
+      text-align: center;
+      color: #088178;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .reclamos-container {
+        margin: 20px;
+        padding: 15px;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        font-size: 12px;
+      }
+
+      .form-group button {
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <section id="header">
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="Tienda.html">Tienda</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="Nosotros.html">Nosotros</a></li>
+        <li><a class="active" href="Reclamos.html">Reclamos</a></li>
+        <li><a href="Contactanos.html">Contacto</a></li>
+        <li><a href="iniciarsesion.html">Iniciar Sesión</a></li>
+        <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+        <a href="#" id="close"><i class="far fa-times"></i></a>
+      </ul>
+    </div>
+    <div id="mobile">
+      <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+      <i id="bar" class="fas fa-outdent"></i>
+    </div>
+  </section>
+
+  <!-- Formulario de Reclamos -->
+  <section id="reclamos" class="section-p1">
+    <div class="reclamos-container">
+      <marquee style="background: #088178; color: white; padding: 10px;">Los reclamos serán atendidos dentro de las 24 horas</marquee>
+      <h2>Formulario de Reclamos</h2>
+      <form id="reclamos-form">
+        <div class="form-group">
+          <label for="nombre">Nombre Completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Correo Electrónico</label>
+          <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+        </div>
+        <div class="form-group">
+          <label for="tipo-reclamo">Tipo de Reclamo</label>
+          <select id="tipo-reclamo" name="tipo-reclamo" required>
+            <option value="">Selecciona una opción</option>
+            <option value="producto">Problema con el producto</option>
+            <option value="envio">Problema con el envío</option>
+            <option value="pago">Problema con el pago</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="detalle">Detalles del Reclamo</label>
+          <textarea id="detalle" name="detalle" placeholder="Describe tu reclamo" required></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit">Enviar Reclamo</button>
+        </div>
+      </form>
+      <p class="form-message" id="form-message">¡Reclamo enviado con éxito!</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section-p1">
+    <div class="col">
+      <img class="logo" src="images/logo.png" alt="Logo" />
+      <h4>Contacto</h4>
+      <p><strong>Dirección:</strong> Arequipa, Perú</p>
+      <p><strong>Número:</strong> +51 951235754</p>
+      <p><strong>Horario:</strong> L - S: 9:00 AM a 4:00 PM</p>
+      <div class="follow">
+        <h4>Síguenos</h4>
+        <div class="icon">
+          <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+          <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h4>Nosotros</h4>
+      <a href="Nosotros.html">Nosotros</a>
+      <a href="terminos.html">Política de privacidad</a>
+      <a href="Contactanos.html">Contáctanos</a>
+    </div>
+    <div class="col">
+      <h4>Mi cuenta</h4>
+      <a href="iniciarsesion.html">Iniciar sesión</a>
+      <a href="cart.html">Carrito</a>
+    </div>
+    <div class="col install">
+      <h4>Instala nuestra app</h4>
+      <p>Desde App Store o Google Play</p>
+      <div class="row">
+        <img src="images/pay/app.jpg" alt="" onclick="window.location.href='https://www.apple.com';" style="cursor: pointer;">
+        <img src="images/pay/play.jpg" alt="" onclick="window.location.href='https://play.google.com';" style="cursor: pointer;">
+      </div>
+      <p>Métodos seguros de pago</p>
+      <img src="images/pay/pay.png" alt="">
+    </div>
+    <div class="copyright">
+      <p>© 2025 Tienda de Alfarería - Todos los derechos reservados</p>
+    </div>
+    <audio id="bgAudio">
+      <source src="sonidos/sonidobtn.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+      document.addEventListener('click', function () {
+        const audio = document.getElementById('bgAudio');
+        audio.play().catch(e => console.log("Error al reproducir:", e));
+      });
+    </script>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById('reclamos-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('form-message').style.display = 'block';
+      this.reset();
+      setTimeout(() => {
+        document.getElementById('form-message').style.display = 'none';
+      }, 3000);
+    });
+  </script>
+</body>
+
+</html>

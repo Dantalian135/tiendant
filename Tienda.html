@@ -74,7 +74,6 @@ button.normal:hover {
         <li><a class="active" href="Tienda.html">Tienda</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="Nosotros.html">Nosotros</a></li>
-       
         <li><a href="Contactanos.html">Contacto</a></li>
         <li><a href="iniciarsesion.html">Iniciar Sesión</a></li>
         <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
@@ -684,9 +683,50 @@ function buscarEnTodasLasPaginas() {
     return;
   }
 
- 
   contenedor.style.display = "block";
   contenedor.scrollIntoView({ behavior: "smooth" });
+
+  resultados.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "pro";
+    card.style.width = "200px";
+    card.style.border = "1px solid #ccc";
+    card.style.borderRadius = "5px";
+    card.style.overflow = "hidden";
+    card.style.textAlign = "center";
+    card.style.padding = "10px";
+
+    const img = document.createElement("img");
+    img.src = p.imagen;
+    img.alt = p.nombre;
+    img.style.width = "100%";
+    img.style.height = "150px";
+    img.style.objectFit = "cover";
+
+    const span = document.createElement("span");
+    span.textContent = p.nombre;
+    span.style.display = "block";
+    span.style.marginTop = "10px";
+    span.style.fontWeight = "bold";
+
+    const precio = document.createElement("p");
+    precio.textContent = `$${p.precio}`;
+    precio.style.margin = "5px 0";
+
+    const btn = document.createElement("button");
+    btn.textContent = "Ver Producto";
+    btn.className = "normal";
+    btn.onclick = () => {
+      window.location.href = p.enlace;
+    };
+
+    card.appendChild(img);
+    card.appendChild(span);
+    card.appendChild(precio);
+    card.appendChild(btn);
+
+    grid.appendChild(card);
+  });
 }
 
 
