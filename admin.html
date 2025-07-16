@@ -64,6 +64,190 @@
       color: #009688;
       font-weight: bold;
     }
+    /* ---------------------------------------------
+   RESPONSIVE - Tablets (≤ 992px)
+--------------------------------------------- */
+@media (max-width: 992px) {
+  section#admin-panel {
+    max-width: 100%;
+    margin: 30px 15px;
+    padding: 15px;
+  }
+
+  #productTable th,
+  #productTable td {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  #productTable input,
+  #productTable select {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .action-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
+
+/* ---------------------------------------------
+   RESPONSIVE - Mobiles (≤ 768px)
+--------------------------------------------- */
+@media (max-width: 768px) {
+  section#admin-panel h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  #productTable {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  #productTable table {
+    width: 100%;
+    min-width: 700px;
+  }
+
+  #productTable th,
+  #productTable td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  #productTable input,
+  #productTable select {
+    font-size: 13px;
+    padding: 4px;
+  }
+
+  .action-btn {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .view-btn {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
+/* ---------------------------------------------
+   RESPONSIVE - Tablets (≤ 992px)
+--------------------------------------------- */
+@media (max-width: 992px) {
+  section#admin-panel {
+    max-width: 100%;
+    margin: 30px 15px;
+    padding: 15px;
+  }
+
+  #productTable th,
+  #productTable td {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  #productTable input,
+  #productTable select {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .action-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .view-btn {
+    margin-bottom: 10px;
+  }
+}
+
+/* ---------------------------------------------
+   RESPONSIVE - Mobiles (≤ 768px)
+--------------------------------------------- */
+@media (max-width: 768px) {
+  section#admin-panel h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  #productTable {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  #productTable thead {
+    width: 1000px; /* ancho mínimo para permitir scroll si es necesario */
+  }
+
+  #productTable th,
+  #productTable td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  #productTable input,
+  #productTable select {
+    font-size: 13px;
+    padding: 4px;
+  }
+
+  .action-btn {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .view-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* ---------------------------------------------
+   RESPONSIVE - Small Mobiles (≤ 480px)
+--------------------------------------------- */
+@media (max-width: 480px) {
+  section#admin-panel {
+    margin: 20px 10px;
+    padding: 10px;
+  }
+
+  section#admin-panel h2 {
+    font-size: 18px;
+  }
+
+  #productTable th,
+  #productTable td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  #productTable input,
+  #productTable select {
+    font-size: 12px;
+    padding: 3px;
+  }
+
+  .action-btn {
+    font-size: 10px;
+    padding: 3px 5px;
+  }
+
+  .view-btn {
+    font-size: 12px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+
+
   </style>
 </head>
 
@@ -95,7 +279,7 @@
     <button class="action-btn view-btn" onclick="verActivos()">Ver Activos</button>
     <button class="action-btn view-btn" onclick="verPapelera()">Ver Papelera</button>
 
-    <<table id="productTable">
+    <table id="productTable">
   <thead>
     <tr>
       <th>Imagen</th>

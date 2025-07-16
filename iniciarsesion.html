@@ -357,6 +357,155 @@ p {
                 width: 143.67px;
             }
         }
+        /* ---------------------------------------------
+   RESPONSIVE - Tablets (≤ 992px)
+--------------------------------------------- */
+@media (max-width: 992px) {
+  .container {
+    width: 90%;
+    height: auto;
+    margin: 40px auto;
+    padding: 30px 20px;
+  }
+
+  .overlay-container {
+    width: 100%;
+    left: 0;
+    height: 300px;
+    position: relative;
+    transform: translateX(0);
+  }
+
+  .overlay {
+    width: 200%;
+    height: 100%;
+    left: -100%;
+  }
+
+  .overlay-panel {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+  }
+
+  .form-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+
+  .sign-in-container,
+  .sign-up-container {
+    opacity: 1;
+    transform: none;
+    z-index: 5;
+  }
+
+  .right-panel-active .sign-in-container,
+  .right-panel-active .sign-up-container {
+    transform: none;
+  }
+
+  .right-panel-active .overlay-container {
+    transform: translateX(0);
+  }
+
+  .right-panel-active .overlay {
+    transform: translateX(0);
+  }
+
+  #overlayBtn {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------
+   RESPONSIVE - Mobiles (≤ 768px)
+--------------------------------------------- */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    height: auto;
+    margin: 30px auto;
+    padding: 20px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .form-container {
+    padding: 10px;
+  }
+
+  .overlay-container {
+    display: none;
+  }
+
+  form h1 {
+    font-size: 28px;
+  }
+
+  .social-container a {
+    height: 35px;
+    width: 35px;
+    margin: 0 3px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 10px 30px;
+    font-size: 12px;
+  }
+
+  p {
+    font-size: 13px;
+    margin: 15px 0 25px;
+  }
+
+  .infield {
+    margin: 10px 0;
+  }
+}
+
+/* ---------------------------------------------
+   RESPONSIVE - Small Mobiles (≤ 480px)
+--------------------------------------------- */
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  form h1 {
+    font-size: 22px;
+  }
+
+  .social-container a {
+    height: 30px;
+    width: 30px;
+    margin: 0 2px;
+  }
+
+  input {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  button {
+    padding: 8px 20px;
+    font-size: 10px;
+  }
+
+  p {
+    font-size: 12px;
+    margin: 10px 0 20px;
+  }
+}
+
     </style>
     
 </head>
